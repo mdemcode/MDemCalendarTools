@@ -1,0 +1,13 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>netstandard2.0</TargetFramework>
+    <GeneratePackageOnBuild>true</GeneratePackageOnBuild>
+    <Authors>Michael Demianczuk</Authors>
+    <Copyright>Copyright © Michał Demiańczuk 2021</Copyright>
+    <NeutralLanguage>pl-PL</NeutralLanguage>
+    <PackageLicenseExpression>GPL-3.0-or-later</PackageLicenseExpression>
+    <Description>Dodatkowe narzędzia związane z kalendarzem</Description>
+  </PropertyGroup>
+
+</Project>
