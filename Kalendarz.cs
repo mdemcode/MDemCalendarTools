@@ -49,6 +49,37 @@ namespace MDemCalendarTools {
             }
             return CultureInfo.InvariantCulture.Calendar.GetWeekOfYear(time, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
         }
+        /// <summary> Zwraca datę danego dnia tygodnia, dla podanego numery tyg. i roku </summary>
+        public static DateTime GetDateFromWeek(int weak, int year, DayOfWeek day) {
+            DateTime jan1          = new DateTime(year, 1, 1);
+            int      daysOffset    = DayOfWeek.Thursday - jan1.DayOfWeek;
+            DateTime firstThursday = jan1.AddDays(daysOffset);
+            var      cal           = CultureInfo.CurrentCulture.Calendar;
+            int      firstWeek     = cal.GetWeekOfYear(firstThursday, CalendarWeekRule.FirstFourDayWeek, DayOfWeek.Monday);
+            var weekNum = weak;
+            if (firstWeek == 1) { weekNum -= 1; }
+            var result = firstThursday.AddDays(weekNum * 7);
+            // Subtract 3 days from Thursday to get Monday, which is the first weekday in ISO8601
+            DateTime pierwszy_dzien = result.AddDays(-3);
+            switch (day) {
+                case DayOfWeek.Monday:
+                    return pierwszy_dzien.AddDays(0).Date;
+                case DayOfWeek.Tuesday:
+                    return pierwszy_dzien.AddDays(1).Date;
+                case DayOfWeek.Wednesday:
+                    return pierwszy_dzien.AddDays(2).Date;
+                case DayOfWeek.Thursday:
+                    return pierwszy_dzien.AddDays(3).Date;
+                case DayOfWeek.Friday:
+                    return pierwszy_dzien.AddDays(4).Date;
+                case DayOfWeek.Saturday:
+                    return pierwszy_dzien.AddDays(5).Date;
+                case DayOfWeek.Sunday:
+                    return pierwszy_dzien.AddDays(6).Date;
+                default:
+                    throw new Exception("TAKI DZIEŃ NIE ISTNIEJE");
+            }
+        }
 
     }
 }
